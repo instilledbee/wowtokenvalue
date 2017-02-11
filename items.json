@@ -1,0 +1,13 @@
+{
+	"charServices": [
+        ["Character Boost", 60.00, 0, 0],
+        ["Character Transfer", 25.00, 0, 0],
+        ["Appearance Change", 15.00, 0, 0],
+        ["Faction Change", 30.00, 0, 0],
+        ["Name Change", 10.00, 0, 0],
+        ["Race Change", 25.00, 0, 0],
+        ["Guild Name Change", 20.00, 0, 0],
+        ["Guild Master Realm Transfer", 35.00, 0, 0],
+        ["Guild Master Faction Transfer", 40.00, 0, 0]
+	]
+}
