@@ -10,22 +10,26 @@ $(document).ready(function() {
         
         console.log(countriesData);
         
-        currRegion = $("#region").val();
+        currRegion = $('#region').val();
         tokenPrice = getTokenPrice(currRegion, true);
         
         updateTokenPriceDisplay(currRegion);
         computeTokensNeeded(tokenPrice, shopData);
-        initDataTables(tokenData, shopData);
+        
+        $('#loading').fadeOut(500, function() {
+            insertTables(shopData);
+        });
     });
     
-    $("#region").change(function() {
-        currRegion = $("#region").val();
+    $('#region').change(function() {
+        currRegion = $('#region').val();
         tokenPrice = getTokenPrice(currRegion, true);
         
         updateTokenPriceDisplay(currRegion);
         computeTokensNeeded(tokenPrice, shopData);
         
-        $("#charServices").DataTable().rows().invalidate();
+        // Refresh all DTs initialized on the page
+        $.fn.dataTable.tables({ 'visible': true, 'api': true }).rows().invalidate();
     });
 });
 
@@ -36,7 +40,7 @@ function wowTokenAjax() {
         success: function(d) {
         },
         error: function(jqXHR, status, error) {
-            console.log("AJAX Error: ");
+            console.log('AJAX Error: ');
             console.log(status);
             console.log(error);
         }
@@ -50,7 +54,7 @@ function shopAjax() {
         success: function(data) {
         },
         error: function(jqXHR, status, error) {
-            console.log("AJAX Error: ");
+            console.log('AJAX Error: ');
             console.log(status);
             console.log(error);
         }
@@ -64,7 +68,7 @@ function countriesAjax() {
         success: function(data) {
         },
         error: function(jqXHR, status, error) {
-            console.log("AJAX Error: ");
+            console.log('AJAX Error: ');
             console.log(status);
             console.log(error);
         }
@@ -82,7 +86,7 @@ function getTokenPrice(currRegion, isRaw) {
 function updateTokenPriceDisplay(currRegion) {
     var tokenPrice = getTokenPrice(currRegion, false);
     
-    $("#currentValue").text(tokenPrice);
+    $('#currentValue').text(tokenPrice);
     
     return tokenPrice;
 }
@@ -94,7 +98,7 @@ function computeTokensNeeded(tokenPrice, shopData) {
             continue;
         }
         
-        var items = shopData[prop];
+        var items = shopData[prop].table;
         
         // Loop through shop items
         for(var j = 0; j < items.length; ++j) {
@@ -105,31 +109,59 @@ function computeTokensNeeded(tokenPrice, shopData) {
     }
 }
 
-function initDataTables(tokenData, shopData) {
-    $('#gameTime').DataTable({
-        'columns': dataTableColumns(),
-        'data': shopData.gameTime,
-        'info': false,
-        'paging': false,
-        //'responsive': true,
-        'searching': false
-    });
-    
-    $('#charServices').DataTable({
-        'columns': dataTableColumns(),
-        'data': shopData.charServices,
-        'info': false,
-        'paging': false,
-        //'responsive': true,
-        'searching': false
-    });
+function insertTables(shopData) {
+    // Loop through shop tables
+    for(var prop in shopData) {
+        if(!shopData.hasOwnProperty(prop)) {
+            continue;
+        }
+        
+        var items = shopData[prop].table;
+        
+        $('#tables').append(
+            $('<div/>').addClass('row').append(
+                $('<div/>').addClass('col-md-12').append(
+                    $('<h2/>').text(shopData[prop].title)
+                ).append(
+                    $('<table/>').attr('id', prop).addClass('table table-striped table-bordered table-hover').append(
+                        $('<thead/>').append(
+                            $('<tr/>').append(
+                                $('<th/>').text('Item')
+                            ).append(
+                                $('<th/>').text('Cost ($)')
+                            ).append(
+                                $('<th/>').text('Gold Needed')
+                            ).append(
+                                $('<th/>').text('Tokens Needed')
+                            )
+                        )
+                    ).append(
+                        $('<tbody/>')
+                    )
+                )
+            )
+        );
+        
+        initDataTable(prop, items);
+    }
 }
 
-function dataTableColumns() {
-    return [
-        { 'title': "Item", 'name': "item" },
-        { 'title': "Cost ($)", 'name': "cost", 'render': function(data) { return data.toFixed(2); } },
-        { 'title': "Gold", 'name': "gold", 'defaultContent': 0, 'render': function(data) { return data.format(); } },
-        { 'title': "Tokens Needed", 'name': "tokens", 'defaultContent': 0 }
-    ];
+function initDataTable(tableId, tableData) {
+    $('#' + tableId).DataTable(dataTableProps(tableData));
+}
+
+function dataTableProps(dataContext) {
+    return {
+        'columns': [
+            { 'title': 'Item', 'name': 'item' },
+            { 'title': 'Cost ($)', 'name': 'cost', 'render': function(data) { return data.toFixed(2); } },
+            { 'title': 'Gold', 'name': 'gold', 'defaultContent': 0, 'render': function(data) { return data.format(); } },
+            { 'title': 'Tokens Needed', 'name': 'tokens', 'defaultContent': 0 }
+        ],
+        'data': dataContext,
+        'info': false,
+        'paging': false,
+        //'responsive': true,
+        'searching': false
+    };
 }
