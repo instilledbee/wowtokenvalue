@@ -9,3 +9,12 @@
 .slide-control {
     cursor: pointer;
 }
+
+.navbar-inverse a.navbar-brand {
+    color: #ffffff;
+}
+
+.emphasize, .emphasize > a {
+    color: #f0e000 !important;
+    font-weight: bold;
+}
