@@ -9,5 +9,70 @@
         ["Guild Name Change", 20.00, 0, 0],
         ["Guild Master Realm Transfer", 35.00, 0, 0],
         ["Guild Master Faction Transfer", 40.00, 0, 0]
-	]
+	],
+    
+    "gameTime": [
+        ["1 Month", 15.00, 0, 0]
+    ],
+    
+    "vanity": [
+        ["Store Mounts", 25.00, 0, 0],
+        ["Pets", 10.00, 0, 0],
+        ["Helms", 15.00, 0, 0]
+    ],
+    
+    "games": [
+        ["Overwatch", 39.99, 0, 0],
+        ["Overwatch Collectors' Edition", 69.99, 0, 0],
+        ["Starcraft II Bundle", 39.99, 0, 0],
+        ["World of Warcraft", 19.99, 0, 0],
+        ["Legion Expansion", 49.99, 0, 0],
+        ["Legion Digital Deluxe", 69.99, 0, 0],
+        ["Diablo III", 19.99, 0, 0],
+        ["Diablo III: Reaper of Souls", 19.99, 0, 0],
+        ["Diablo III Battle Chest", 29.99, 0, 0]
+    ],
+    
+    "classicGames": [
+        ["Diablo II", 9.99, 0, 0],
+        ["Diablo II: Lord of Destruction", 9.99, 0, 0],
+        ["Starcraft Anthology", 14.99, 0, 0],
+        ["Warcraft III: Reign of Chaos", 9.99, 0, 0],
+        ["Warcraft III: The Frozen Throne", 9.99, 0, 0]
+    ],
+    
+    "bnet": [
+        ["BattleTag Change", 10.00, 0, 0]
+    ],
+    
+    "hearthstone": [
+        ["2 Packs", 2.99, 0, 0],
+        ["7 Packs", 9.99, 0, 0],
+        ["15 Packs", 19.99, 0, 0],
+        ["40 Packs", 49.99, 0, 0],
+        ["60 Packs", 69.99, 0, 0],
+        ["Mean Sreets of Gadgetzan", 2.99, 0, 0],
+        ["Welcome Bundle", 4.99, 0, 0],
+        ["One Night in Karazhan", 19.99, 0, 0],
+        ["Blackrock Mountain", 24.99, 0, 0],
+        ["League of Explorers", 19.99, 0, 0],
+        ["Hero skins", 9.99, 0, 0]
+    ],
+    
+    "overwatch": [
+        ["2 Loot Boxes", 1.99, 0, 0],
+        ["5 Loot Boxes", 4.99, 0, 0],
+        ["11 Loot Boxes", 9.99, 0, 0],
+        ["24 Loot Boxes", 19.99, 0, 0],
+        ["50 Loot Boxes", 39.99, 0, 0]
+    ],
+    
+    "starcraft": [
+        ["Nova Covert Ops", 7.49, 0, 0],
+        ["Nova Covert Ops: Bundle", 14.99, 0, 0],
+        ["Commander: Stukov", 4.99, 0, 0],
+        ["Commander: Nova", 4.99, 0, 0],
+        ["Commander: Alarak", 4.99, 0, 0],
+        ["Commander: Abathur", 4.99, 0, 0]
+    ]
 }

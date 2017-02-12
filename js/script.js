@@ -19,7 +19,13 @@ $(document).ready(function() {
     });
     
     $("#region").change(function() {
-        updateTokenPrice(tokenData);
+        currRegion = $("#region").val();
+        tokenPrice = getTokenPrice(currRegion, true);
+        
+        updateTokenPriceDisplay(currRegion);
+        computeTokensNeeded(tokenPrice, shopData);
+        
+        $("#charServices").DataTable().rows().invalidate();
     });
 });
 
@@ -100,16 +106,30 @@ function computeTokensNeeded(tokenPrice, shopData) {
 }
 
 function initDataTables(tokenData, shopData) {
+    $('#gameTime').DataTable({
+        'columns': dataTableColumns(),
+        'data': shopData.gameTime,
+        'info': false,
+        'paging': false,
+        //'responsive': true,
+        'searching': false
+    });
+    
     $('#charServices').DataTable({
-        'columns': [
-            { 'title': "Item", 'name': "item" },
-            { 'title': "Cost ($)", 'name': "cost", 'render': function(data) { return data.toFixed(2); } },
-            { 'title': "Gold", 'name': "gold", 'defaultContent': 0, 'render': function(data) { return data.format(); } },
-            { 'title': "Tokens Needed", 'name': "tokens", 'defaultContent': 0 }
-        ],
+        'columns': dataTableColumns(),
         'data': shopData.charServices,
         'info': false,
         'paging': false,
+        //'responsive': true,
         'searching': false
     });
+}
+
+function dataTableColumns() {
+    return [
+        { 'title': "Item", 'name': "item" },
+        { 'title': "Cost ($)", 'name': "cost", 'render': function(data) { return data.toFixed(2); } },
+        { 'title': "Gold", 'name': "gold", 'defaultContent': 0, 'render': function(data) { return data.format(); } },
+        { 'title': "Tokens Needed", 'name': "tokens", 'defaultContent': 0 }
+    ];
 }
