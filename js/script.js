@@ -121,7 +121,9 @@ function insertTables(shopData) {
         $('#tables').append(
             $('<div/>').addClass('row').append(
                 $('<div/>').addClass('col-md-12').append(
-                    $('<h2/>').text(shopData[prop].title)
+                    $('<h2/>').addClass("slide-control").text(shopData[prop].title).click(function() {
+                        $(this).next("div").slideToggle();
+                    })
                 ).append(
                     $('<table/>').attr('id', prop).addClass('table table-striped table-bordered table-hover').append(
                         $('<thead/>').append(

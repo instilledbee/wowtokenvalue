@@ -6,6 +6,6 @@
     padding: 15px;
 }
 
-#tables {
-    
+.slide-control {
+    cursor: pointer;
 }
